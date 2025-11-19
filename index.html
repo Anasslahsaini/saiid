@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Zuhör-Raum | Sicher & Anonym Zuhören</title>
+    <!-- Palette: Warm & Trusting (Soft Trust Blue, Warm Linen White, Sage Calm Green, Deep Blue-Green, Muted Rose-Beige) -->
+    <!-- Typography Change: Unified to Inter only for a more professional, consistent look across all devices. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-blue': '#ADC7D9',
+                        'warm-linen': '#FAF5EF',
+                        'sage-green': '#B8C8BD',
+                        'deep-blue-green': '#2E4A49',
+                        'rose-beige': '#D8C7C0',
+                    },
+                    fontFamily: {
+                        // Unified font family for a cleaner, professional look
+                        sans: ['Inter', 'sans-serif'], 
+                    },
+                    borderRadius: {
+                        '2xl': '16px',
+                        '3xl': '24px',
+                        '4xl': '28px',
+                    },
+                    lineHeight: {
+                        'air': '1.65',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS für Hash-Routing und Animation */
+        .page-content {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .page-content:not(.active-page) {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            position: absolute;
+            pointer-events: none;
+            transform: translateY(10px);
+        }
+        .page-content.active-page {
+             opacity: 1;
+             height: auto;
+             position: relative;
+             pointer-events: auto;
+             transform: translateY(0);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #B8C8BD;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active {
+            color: #2E4A49;
+            font-weight: 700;
+        }
+
+        /* Unique Components */
+        .safe-space-bubble {
+            @apply bg-gradient-to-br from-warm-linen to-soft-blue/30 rounded-3xl p-6 md:p-10 shadow-sm border border-warm-linen/50;
+        }
+
+        .whisper-cta {
+            /* Sekundärer, sanfter CTA */
+            @apply inline-block bg-sage-green text-deep-blue-green rounded-4xl py-3 px-8 font-semibold transition-all duration-300 ease-in-out;
+        }
+        .whisper-cta:hover {
+             @apply opacity-90 shadow-md;
+        }
+
+        .prominent-cta {
+            /* Primärer, klarer CTA */
+            @apply inline-block bg-deep-blue-green text-warm-linen rounded-4xl py-4 px-10 font-bold text-xl shadow-xl hover:bg-deep-blue-green/90 transition-all duration-300 ease-in-out;
+        }
+
+        .calm-divider {
+            @apply border-t border-rose-beige opacity-20 max-w-lg mx-auto;
+        }
+    </style>
+</head>
+<body class="bg-warm-linen text-deep-blue-green/90 font-sans antialiased leading-air" style="color: #2E4A49;">
+
+    <header class="bg-warm-linen/90 backdrop-blur-sm sticky top-0 z-50 border-b border-rose-beige/20">
+        <nav class="container mx-auto max-w-6xl px-6 py-4 flex justify-between items-center">
+            <!-- Professional, unified font for logo -->
+            <a href="#home" class="font-sans text-xl font-extrabold text-deep-blue-green tracking-tight">Der Zuhör-Raum</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" data-page="home" class="nav-link text-deep-blue-green/80">Home</a>
+                <a href="#about" data-page="about" class="nav-link text-deep-blue-green/80">Über Mich</a>
+                <a href="#services" data-page="services" class="nav-link text-deep-blue-green/80">Leistungen</a>
+                <a href="#privacy" data-page="privacy" class="nav-link text-deep-blue-green/80">Sicherheit</a>
+            </div>
+            <a href="#booking" class="prominent-cta cta-booking hidden md:inline-block text-sm py-2 px-6">Jetzt anonym sprechen</a>
+            <button id="mobile-menu-btn" class="md:hidden text-deep-blue-green">
+                <span class="text-3xl">&#x2261;</span> <!-- Hamburger Unicode Icon -->
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-warm-linen shadow-lg border-t border-rose-beige/20">
+            <a href="#home" data-page="home" class="block py-3 px-6 text-deep-blue-green/80 nav-link mobile-link">Home</a>
+            <a href="#about" data-page="about" class="block py-3 px-6 text-deep-blue-green/80 nav-link mobile-link">Über Mich</a>
+            <a href="#services" data-page="services" class="block py-3 px-6 text-deep-blue-green/80 nav-link mobile-link">Leistungen</a>
+            <a href="#privacy" data-page="privacy" class="block py-3 px-6 text-deep-blue-green/80 nav-link mobile-link">Sicherheit</a>
+            <a href="#booking" class="block text-center prominent-cta m-4">Jetzt anonym sprechen</a>
+        </div>
+    </header>
+
+    <div id="page-container" class="relative">
+
+        <!-- ===== Homepage ===== -->
+        <main id="page-home" class="page-content active-page">
+            <section class="min-h-[60vh] flex items-center bg-gradient-to-b from-warm-linen via-warm-linen to-soft-blue/20 pt-24 pb-16 md:pt-32 md:pb-24">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Klarer 1-Satz-Pitch (Improved contrast for professionalism) -->
+                    <p class="font-semibold text-lg text-deep-blue-green/70">Ein geschützter Raum für emotionale Entlastung – ohne Druck, nur Zuhören.</p>
+                    <!-- Unified font: now just Inter, using font-extrabold for impact -->
+                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green leading-tight mt-4">Ich höre dir zu – damit du dich leichter fühlst.</h1>
+                    <!-- Unified font -->
+                    <p class="font-sans text-xl md:text-2xl text-deep-blue-green/80 mt-6">Anonym. Vertraulich. Ohne Urteil.</p>
+                </div>
+            </section>
+
+            <!-- Statement & CTA Section (Visuell Hervorgehoben) -->
+            <section class="py-16 md:py-20 bg-sage-green/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Unified font -->
+                    <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Der Kern des Angebots: Sicherheit zuerst.</h2>
+                    <p class="text-lg mt-6 max-w-prose mx-auto">
+                        Dein Wohlbefinden hat Priorität. Dieser Dienst ist konzipiert für **absolute Anonymität**. Wir verwenden sichere Technologien, zeichnen nichts auf und löschen alle temporären Daten sofort. Deine Session ist dein Raum.
+                    </p>
+                    <p class="text-lg mt-4 font-semibold max-w-prose mx-auto">
+                        <span class="text-deep-blue-green">&#x2713;</span>  Keine Registrierung.  <span class="text-deep-blue-green">&#x2713;</span>  Keine Aufzeichnung.
+                    </p>
+                    <a href="#booking" class="prominent-cta mt-12">Jetzt anonym sprechen</a>
+                </div>
+            </section>
+            
+            <hr class="calm-divider my-20">
+
+            <section class="py-12 md:py-24">
+                <div class="container mx-auto max-w-5xl px-6 grid md:grid-cols-2 gap-10 items-start">
+                    <div>
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Was du hier bekommst</h2>
+                        <p class="text-lg mt-6 max-w-prose">
+                            Ich biete dir meine ungeteilte Aufmerksamkeit. In einer 1:1-Session, die sich nur um dich dreht. Per Chat, Audio oder Video – so, wie es sich für dich am besten anfühlt.
+                        </p>
+                        <p class="text-lg mt-4 max-w-prose">
+                            <strong>Es geht nicht um Ratschläge. Es geht um Verständnis.</strong> Es ist ein Moment der emotionalen Entlastung, der dir hilft, deine eigenen Klarheit zu finden.
+                        </p>
+                        <a href="#services" class="whisper-cta mt-8">Alle Sessions im Überblick</a>
+                    </div>
+                    <div class="safe-space-bubble">
+                        <!-- Unified font -->
+                        <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Für wen ist dieser Ort?</h3>
+                        <p class="mt-4 text-lg">Dieser Raum ist für dich, wenn du:</p>
+                        <ul class="mt-4 space-y-3 text-lg">
+                            <li class="flex items-start">
+                                <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2022;</span> Deine Gedanken sortieren möchtest, ohne Angst vor Verurteilung.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2022;</span> Einfach Dampf ablassen oder eine Belastung loswerden willst.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2022;</span> Dich mit deinen Sorgen allein fühlst.
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2022;</span> Niemanden in deinem Umfeld belasten willst.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="calm-divider my-20">
+
+            <section class="py-12 md:py-24 bg-soft-blue/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Unified font -->
+                    <h2 class="font-sans text-3xl md:text-4xl font-bold text-deep-blue-green">Warum Zuhören wirkt</h2>
+                    <p class="text-lg mt-8 max-w-prose mx-auto font-semibold">
+                        <span class="text-deep-blue-green text-2xl mr-2">&#x2605;</span> Wissenschaftlich fundierte Entlastung.
+                    </p>
+                    <p class="text-lg mt-6 max-w-prose mx-auto">
+                        Aktives, empathisches Zuhören ist eine validierende Präsenz. Wenn ein Mensch sich vollkommen angenommen und verstanden fühlt, aktiviert dies die Selbstheilungskräfte. Du kannst deine Gefühle besser sortieren und findest oft selbst den Weg zu mehr Klarheit und emotionaler Entlastung.
+                    </p>
+                    <p class="text-lg mt-6 max-w-prose mx-auto">
+                        Meine Rolle ist es, den Raum zu halten, nicht, ihn mit Ratschlägen zu füllen.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- ===== Über Mich Page ===== -->
+        <main id="page-about" class="page-content">
+            <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-soft-blue/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Unified font -->
+                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Über Mich: Dein Anker im Gespräch</h1>
+                    <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
+                        Ich bin hier, um dir zuzuhören. Aber wer bin "ich"?
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 md:py-32">
+                <div class="container mx-auto max-w-2xl px-6">
+                    <!-- Unified font -->
+                    <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Wie ich arbeite</h2>
+                    <p class="text-lg mt-6 max-w-prose">
+                        Ich habe eine fundierte Ausbildung im aktiven, nicht-direktiven Zuhören, inspiriert von Methoden wie der gewaltfreien Kommunikation und der klientenzentrierten Gesprächsführung. Es ist meine tiefe Überzeugung, dass jeder Mensch es verdient hat, gehört zu werden.
+                    </p>
+
+                    <hr class="calm-divider my-16">
+
+                    <!-- Unified font -->
+                    <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Warum ich diesen Raum geschaffen habe</h2>
+                    <p class="text-lg mt-6 max-w-prose">
+                        Ich habe diesen Dienst gegründet, weil ich selbst erlebt habe, wie schwer es sein kann, einen vertrauensvollen Ort für die Sorgen des Alltags zu finden – einen Ort ohne Wartezeiten, ohne Stigma und ohne den Druck, "funktionieren" zu müssen.
+                    </p>
+                    <p class="text-lg mt-4 font-semibold max-w-prose">
+                         Meine Motivation ist die menschliche Präsenz: Eine ruhige, warme Stimme, die einfach da ist.
+                    </p>
+
+                    <hr class="calm-divider my-16">
+
+                    <div class="safe-space-bubble p-8 md:p-12">
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Grenzen setzen: Was ich tue – und was ich nicht tue</h2>
+                        
+                        <div class="mt-8 grid md:grid-cols-2 gap-8">
+                            <div>
+                                <!-- Unified font -->
+                                <h3 class="font-sans text-xl font-bold text-deep-blue-green">Was du erwarten kannst:</h3>
+                                <ul class="mt-4 space-y-3 text-lg">
+                                    <li class="flex items-start">
+                                        <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2713;</span>  Einen geschützten, anonymen Raum.
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2713;</span>  Aktives, empathisches Zuhören.
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-deep-blue-green text-xl mr-3 mt-0.5">&#x2713;</span>  Spiegelung deiner Gefühle zur Klärung.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <!-- Unified font -->
+                                <h3 class="font-sans text-xl font-bold text-deep-blue-green">Was ich NICHT anbiete:</h3>
+                                 <ul class="mt-4 space-y-3 text-lg">
+                                    <li class="flex items-start">
+                                        <span class="text-rose-beige text-xl mr-3 mt-0.5">&#x2717;</span>  Psychologische Therapie oder Diagnosen.
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-beige text-xl mr-3 mt-0.5">&#x2717;</span>  Ersatz für ärztliche oder therapeutische Hilfe.
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-rose-beige text-xl mr-3 mt-0.5">&#x2717;</span>  Vorgefertigte Ratschläge oder Lösungen.
+                                    </li>
+                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-20">
+                         <a href="#booking" class="prominent-cta">Session buchen – Sicher & Anonym</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ===== Leistungen Page ===== -->
+        <main id="page-services" class="page-content">
+            <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-soft-blue/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Unified font -->
+                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Dein Weg zur Entlastung</h1>
+                    <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
+                        Wähle die Form, die sich für dich am besten anfühlt. Jede Session ist 100% vertraulich.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 md:py-32">
+                <div class="container mx-auto max-w-6xl px-6">
+                    <!-- Unified font -->
+                    <h2 class="font-sans text-3xl font-bold text-deep-blue-green text-center">Wähle dein anonymes Format</h2>
+                    <p class="text-center text-lg mt-4 mb-16">Finde die Kommunikationsform, die dir gerade am meisten Sicherheit gibt.</p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Safe Space Bubble für jede Option -->
+                        <div class="safe-space-bubble flex flex-col">
+                            <!-- Unified font -->
+                            <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Chat Session</h3>
+                            <p class="text-lg mt-4 font-semibold text-deep-blue-green">Digitaler Raum zum Sortieren.</p>
+                            <p class="text-lg mt-4 flex-grow">
+                                Für Momente, in denen du deine Gedanken lieber aufschreibst. Das Tippen hilft, Gefühle zu sortieren und du hast Zeit zum Formulieren. Völlig anonym, ohne Stimme, ohne Bild.
+                            </p>
+                        </div>
+                        <div class="safe-space-bubble flex flex-col border-2 border-sage-green shadow-xl">
+                             <!-- Unified font -->
+                             <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Audio Session</h3>
+                             <p class="text-lg mt-4 font-semibold text-deep-blue-green">Die menschliche Stimme als Anker.</p>
+                            <p class="text-lg mt-4 flex-grow">
+                                Manchmal tut es gut, eine menschliche Stimme zu hören – oder die eigene Stimme zu nutzen. Eine direkte, aber dennoch anonyme Verbindung. Kein Video, nur das Gespräch.
+                            </p>
+                        </div>
+                        <div class="safe-space-bubble flex flex-col">
+                             <!-- Unified font -->
+                             <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Video Session</h3>
+                             <p class="text-lg mt-4 font-semibold text-deep-blue-green">Direkte, ruhige Präsenz.</p>
+                            <p class="text-lg mt-4 flex-grow">
+                                Für diejenigen, die ein direktes Gegenüber schätzen. Mimik und Präsenz können Trost spenden. Es ist die persönlichste Form, aber deine Identität bleibt geschützt.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="calm-divider my-16">
+            
+            <section class="py-16 md:py-24 bg-warm-linen">
+                <div class="container mx-auto max-w-4xl px-6 grid md:grid-cols-2 gap-10 items-center">
+                     <div>
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl md:text-4xl font-bold text-deep-blue-green">Dauer & Preise</h2>
+                        <p class="text-lg mt-6 max-w-prose">
+                            Wähle die Länge, die zu deinem aktuellen emotionalen Zustand passt.
+                        </p>
+                         <ul class="mt-8 space-y-6 text-lg">
+                            <li class="safe-space-bubble p-4">
+                                <!-- Unified font -->
+                                <strong class="font-sans text-xl text-deep-blue-green">Fast Support (20 Min)</strong>
+                                <p class="mt-1">Für akute Momente der Überlastung, in denen du schnell einen Zuhörer brauchst.</p>
+                            </li>
+                            <li class="safe-space-bubble p-4">
+                                <!-- Unified font -->
+                                <strong class="font-sans text-xl text-deep-blue-green">Intensive Session (50 Min)</strong>
+                                <p class="mt-1">Um tiefer in deine Gedanken einzutauchen und Dingen wirklich Raum zu geben.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="safe-space-bubble text-center border-2 border-deep-blue-green/50">
+                        <!-- Unified font -->
+                        <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Der nächste Schritt.</h3>
+                        <p class="text-lg mt-4">
+                            Finde einen Termin, der für dich passt. Ganz ohne Druck.
+                        </p>
+                        <a href="#booking" class="prominent-cta mt-8">Jetzt Session buchen</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ===== Buchung Page ===== -->
+        <main id="page-booking" class="page-content">
+            <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-soft-blue/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Unified font -->
+                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Session buchen: So einfach geht's</h1>
+                    <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
+                        In nur 3 Schritten zu deinem Gespräch. Wir fragen keine sensiblen Daten ab.
+                    </p>
+                </div>
+            </section>
+            
+            <section class="py-24 md:py-32">
+                <div class="container mx-auto max-w-2xl px-6">
+                    <div class="space-y-12">
+                        <div class="flex items-start space-x-6">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-sage-green text-deep-blue-green font-bold font-sans text-2xl border-2 border-deep-blue-green">1</div>
+                            <div>
+                                <!-- Unified font -->
+                                <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Format & Dauer wählen</h2>
+                                <p class="text-lg mt-4">Lege fest, ob du per Chat, Audio oder Video sprechen möchtest und entscheide dich für 20 oder 50 Minuten.</p>
+                            </div>
+                        </div>
+                        
+                         <div class="flex items-start space-x-6">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-sage-green text-deep-blue-green font-bold font-sans text-2xl border-2 border-deep-blue-green">2</div>
+                            <div>
+                                <!-- Unified font -->
+                                <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Termin finden & E-Mail eingeben</h2>
+                                <p class="text-lg mt-4">Wähle einen freien Slot. Du musst nur eine E-Mail-Adresse für den einmaligen Session-Link angeben. Diese wird nur temporär gespeichert.</p>
+                                <div class="safe-space-bubble p-6 mt-6">
+                                    <p class="font-semibold text-deep-blue-green">Kalender-Embed Platzhalter</p>
+                                    <p class="text-deep-blue-green/80 mt-2 text-sm">Hier würde ein datenschutzkonformer Buchungskalender geladen werden.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="flex items-start space-x-6">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-sage-green text-deep-blue-green font-bold font-sans text-2xl border-2 border-deep-blue-green">3</div>
+                            <div>
+                                <!-- Unified font -->
+                                <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Sicher bezahlen & Bestätigen</h2>
+                                <p class="text-lg mt-4">Die Bezahlung erfolgt anonymisiert über einen externen Dienstleister. Ich habe keinen Zugriff auf deine Zahlungsdaten. Deine Session wird bestätigt und dein Link generiert.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="calm-divider my-20">
+
+                    <div class="safe-space-bubble p-8 md:p-12 text-center bg-gradient-to-br from-soft-blue/50 to-sage-green/10">
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Was passiert vor deiner Session?</h2>
+                        <p class="text-lg mt-6 max-w-prose mx-auto">
+                            Du erhältst eine E-Mail mit deinem **anonymen, einmaligen Zugangslink**. Klicke zum vereinbarten Zeitpunkt darauf. Du bist sofort da.
+                        </p>
+                        <p class="text-xl font-semibold mt-8 max-w-prose mx-auto text-deep-blue-green">
+                            Keine Hürden. Nur Zuhören.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ===== Datenschutz & Sicherheit Page ===== -->
+        <main id="page-privacy" class="page-content">
+            <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-soft-blue/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <!-- Unified font -->
+                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Deine Sicherheit: Mein Versprechen</h1>
+                    <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
+                        Vertrauen ist die Basis. Hier erfährst du präzise, wie deine Anonymität gewährleistet wird.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24 md:py-32">
+                <div class="container mx-auto max-w-2xl px-6 space-y-12">
+                    <div>
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Das Prinzip der Vertraulichkeit</h2>
+                        <p class="text-lg mt-4 max-w-prose">
+                            Alles, was du in unseren Sessions teilst, bleibt **zu 100% vertraulich**. Ich unterliege einer strengen, selbst auferlegten Schweigepflicht. Es gibt keine Weitergabe von Inhalten, es sei denn, es liegt eine akute Selbst- oder Fremdgefährdung vor (siehe 'Ethische Grenzen').
+                        </p>
+                    </div>
+                    <hr class="calm-divider">
+                    <div>
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Keine Aufzeichnungen. Keine Protokolle.</h2>
+                        <p class="text-lg mt-4 max-w-prose">
+                            Ich speichere keine Inhalte deiner Gespräche. Chat-Verläufe werden unmittelbar nach der Session gelöscht. Es gibt keine Aufzeichnungen von Audio- oder Videoanrufen. Die verwendete Plattform ist end-to-end verschlüsselt und speichert keine Gesprächsdaten.
+                        </p>
+                        <p class="text-lg mt-4 font-semibold text-deep-blue-green">
+                             <span class="text-deep-blue-green text-xl mr-2">&#x2717;</span>  Keine Speicherung deiner Worte.
+                        </p>
+                    </div>
+                    <hr class="calm-divider">
+                    <div>
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Anonymität beim Buchen</h2>
+                        <p class="text-lg mt-4 max-w-prose">
+                            Du musst bei der Buchung keinen echten Namen angeben. Die E-Mail-Adresse, die du für den Session-Link verwendest, wird 24 Stunden nach deiner Session automatisch aus meinem System gelöscht, um eine dauerhafte Verknüpfung zu vermeiden.
+                        </p>
+                        <p class="text-lg mt-4 font-semibold text-deep-blue-green">
+                            <span class="text-deep-blue-green text-xl mr-2">&#x2713;</span>  Deine Daten sind temporär und nicht mit deiner Person verknüpfbar.
+                        </p>
+                    </div>
+                    <hr class="calm-divider">
+                    <div>
+                        <!-- Unified font -->
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Ethische Grenzen & Notfall</h2>
+                        <p class="text-lg mt-4 max-w-prose">
+                            Dieser Dienst ist kein Ersatz für professionelle psychologische oder psychiatrische Behandlung. Bei akuter Selbst- oder Fremdgefährdung bin ich verpflichtet, dich auf professionelle Notfalldienste zu verweisen, da ich diese Art von Nothilfe nicht leisten kann.
+                        </p>
+                        <p class="text-lg mt-4 font-semibold max-w-prose">
+                            Im Notfall wende dich bitte an: Telefonseelsorge (116 123) oder den ärztlichen Bereitschaftsdienst (116 117).
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <footer class="bg-soft-blue/20 border-t border-rose-beige/20 mt-20">
+        <div class="container mx-auto max-w-6xl px-6 py-16">
+            <div class="md:flex md:justify-between">
+                <div class="mb-8 md:mb-0 max-w-sm">
+                    <!-- Unified font -->
+                    <a href="#home" class="font-sans text-xl font-extrabold text-deep-blue-green">Der Zuhör-Raum</a>
+                    <p class="mt-4 text-deep-blue-green/80 text-sm">Ein sicherer, anonymer Raum, um gehört zu werden. Vertraulich & ohne Urteil.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <!-- Unified font -->
+                        <h3 class="font-sans font-semibold text-deep-blue-green">Navigation</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#home" class="nav-link text-deep-blue-green/80">Home</a></li>
+                            <li><a href="#about" class="nav-link text-deep-blue-green/80">Über Mich</a></li>
+                            <li><a href="#services" class="nav-link text-deep-blue-green/80">Leistungen</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <!-- Unified font -->
+                        <h3 class="font-sans font-semibold text-deep-blue-green">Buchen</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#booking" class="nav-link text-deep-blue-green/80">Session buchen</a></li>
+                            <li><a href="#privacy" class="nav-link text-deep-blue-green/80">Sicherheit & Vertrauen</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <!-- Unified font -->
+                        <h3 class="font-sans font-semibold text-deep-blue-green">Rechtliches</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="nav-link text-deep-blue-green/80">Impressum</a></li>
+                            <li><a href="#privacy" class="nav-link text-deep-blue-green/80">Datenschutz (DSGVO)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="calm-divider my-12 opacity-50">
+            <p class="text-center text-deep-blue-green/70 text-sm">© 2025 Der Zuhör-Raum. Alle Rechte vorbehalten. | <a href="#privacy" class="underline hover:text-deep-blue-green">Sicher & Vertraulich</a></p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const pages = document.querySelectorAll('.page-content');
+            
+            // Funktion zum Anzeigen der Seite basierend auf dem Hash
+            function showPageFromHash() {
+                let hash = window.location.hash.substring(1) || 'home';
+                const pageId = `page-${hash}`;
+                
+                let foundPage = false;
+                pages.forEach(page => {
+                    const isActive = page.id === pageId;
+                    page.classList.toggle('active-page', isActive);
+                    page.classList.toggle('hidden', !isActive); // hidden zusätzlich für initiales Styling
+                    if (isActive) foundPage = true;
+                });
+
+                if (!foundPage) {
+                    // Fallback zur Home-Seite, wenn der Hash ungültig ist
+                    window.location.hash = 'home';
+                    document.getElementById('page-home').classList.add('active-page');
+                }
+
+                // Nav-Links aktualisieren
+                navLinks.forEach(link => {
+                    const linkPage = link.getAttribute('href').substring(1);
+                    link.classList.toggle('active', linkPage === hash);
+                });
+                
+                // Mobilmenü schließen
+                mobileMenu.classList.add('hidden');
+                window.scrollTo(0, 0);
+            }
+
+            // Event Listener für Hash-Änderungen
+            window.addEventListener('hashchange', showPageFromHash);
+
+            // Initialer Aufruf beim Laden
+            showPageFromHash();
+
+            // Klick-Listener für Navigations-Links (um Hash zu setzen)
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const hash = link.getAttribute('href');
+                    if (hash) {
+                        window.location.hash = hash.substring(1);
+                    }
+                });
+            });
+            
+            // Klick-Listener für CTAs (die zur Buchungsseite führen)
+            document.querySelectorAll('.cta-booking').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.hash = 'booking';
+                });
+            });
+
+            // Mobile-Menü-Toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+        });
+    </script>
+</body>
+</html>
