@@ -6,7 +6,6 @@
     <title>Der Zuhör-Raum | Sicher & Anonym Zuhören</title>
     <!-- Updated Favicon: Sage Green Dot to match the logo -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23B8C8BD%22/></svg>">
-    <!-- Palette: Warm & Trusting (Soft Trust Blue, Warm Linen White, Sage Calm Green, Deep Blue-Green, Muted Rose-Beige) -->
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -110,7 +109,6 @@
         }
 
         .whisper-cta {
-            /* Sekundärer, sanfter CTA */
             display: inline-block;
             background-color: #B8C8BD;
             color: #2E4A49;
@@ -126,14 +124,13 @@
         }
 
         .prominent-cta {
-            /* Primärer, klarer CTA */
             display: inline-block;
             background-color: #2E4A49;
             color: #FAF5EF;
             border-radius: 28px;
             padding: 1rem 2.5rem;
             font-weight: 700;
-            font-size: 1.125rem; /* text-lg */
+            font-size: 1.125rem; 
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease-in-out;
         }
@@ -146,24 +143,20 @@
         .calm-divider {
             border-top: 1px solid #D8C7C0;
             opacity: 0.2;
-            max-width: 32rem; /* max-w-lg */
+            max-width: 32rem;
             margin-left: auto;
             margin-right: auto;
         }
     </style>
 </head>
-<!-- Added hyphens-auto for better German text handling on small screens -->
-<!-- Added pb-24 to body to ensure content isn't hidden behind the fixed mobile button -->
 <body class="bg-warm-linen text-deep-blue-green/90 font-sans antialiased leading-air flex flex-col min-h-screen hyphens-auto pb-24 md:pb-0" style="color: #2E4A49;">
 
     <header class="bg-warm-linen/95 backdrop-blur-md sticky top-0 z-50 border-b border-rose-beige/20 transition-all duration-300">
         <nav class="container mx-auto max-w-6xl px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
             <a href="#home" onclick="navigateTo('home')" class="font-sans text-xl font-extrabold text-deep-blue-green tracking-tight flex items-center gap-2 z-50 relative">
                 <span class="text-2xl text-sage-green">●</span> Der Zuhör-Raum
             </a>
 
-            <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#home" onclick="navigateTo('home')" id="nav-home" class="nav-link text-deep-blue-green/80 text-sm uppercase tracking-wide font-medium">Home</a>
                 <a href="#about" onclick="navigateTo('about')" id="nav-about" class="nav-link text-deep-blue-green/80 text-sm uppercase tracking-wide font-medium">Über Mich</a>
@@ -175,7 +168,6 @@
                 <a href="#booking" onclick="navigateTo('booking')" class="prominent-cta hidden md:inline-block text-sm py-2 px-6 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 !text-base">
                     Gespräch buchen
                 </a>
-                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden text-deep-blue-green p-2 hover:bg-sage-green/20 rounded-lg transition-colors z-50 relative">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -184,19 +176,16 @@
             </div>
         </nav>
 
-        <!-- Mobile Menu Overlay - Increased Z-Index and ensure full width -->
         <div id="mobile-menu" class="hidden md:hidden bg-warm-linen shadow-2xl border-t border-rose-beige/20 absolute w-full left-0 top-full z-40 pb-6">
             <div class="flex flex-col p-4 space-y-2">
                 <a href="#home" onclick="navigateTo('home')" class="block py-4 px-6 rounded-xl hover:bg-sage-green/20 text-deep-blue-green font-medium text-lg">Home</a>
                 <a href="#about" onclick="navigateTo('about')" class="block py-4 px-6 rounded-xl hover:bg-sage-green/20 text-deep-blue-green font-medium text-lg">Über Mich</a>
                 <a href="#services" onclick="navigateTo('services')" class="block py-4 px-6 rounded-xl hover:bg-sage-green/20 text-deep-blue-green font-medium text-lg">Leistungen</a>
                 <a href="#privacy" onclick="navigateTo('privacy')" class="block py-4 px-6 rounded-xl hover:bg-sage-green/20 text-deep-blue-green font-medium text-lg">Sicherheit</a>
-                <!-- Removed CTA here since we have the fixed bar now, but keeping "Jetzt anonym sprechen" link logic if needed, simplified for now -->
             </div>
         </div>
     </header>
 
-    <!-- Page Container for Transitions -->
     <div id="page-container" class="relative flex-grow w-full max-w-full overflow-x-hidden">
 
         <!-- ===== Homepage ===== -->
@@ -213,8 +202,8 @@
                         Anonym. Vertraulich. Ohne Urteil.
                     </p>
                     <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                        <!-- Hidden on mobile because of the fixed bar -->
                         <a href="#booking" onclick="navigateTo('booking')" class="prominent-cta w-full sm:w-auto text-center hidden md:inline-block">Jetzt Gespräch buchen</a>
+                        <!-- Reverted back to Mehr erfahren -->
                         <a href="#about" onclick="navigateTo('about')" class="text-deep-blue-green font-semibold py-4 px-8 hover:text-deep-blue-green/70 transition-colors flex items-center justify-center">
                             Mehr erfahren <span class="ml-2">→</span>
                         </a>
@@ -285,9 +274,6 @@
                     <p class="text-lg mt-6 max-w-prose mx-auto text-deep-blue-green/80">
                         Aktives, empathisches Zuhören ist eine validierende Präsenz. Wenn ein Mensch sich vollkommen angenommen und verstanden fühlt, aktiviert dies die Selbstheilungskräfte. Du kannst deine Gefühle besser sortieren und findest oft selbst den Weg zu mehr Klarheit und emotionaler Entlastung.
                     </p>
-                    <p class="text-lg mt-6 max-w-prose mx-auto italic text-deep-blue-green/70">
-                        Meine Rolle ist es, den Raum zu halten, nicht, ihn mit Ratschlägen zu füllen.
-                    </p>
                 </div>
             </section>
         </main>
@@ -309,61 +295,13 @@
                     </p>
                 </div>
             </section>
-
-            <section class="py-24 md:py-32">
+             <!-- ... content similar to before ... -->
+             <section class="py-24 md:py-32">
                 <div class="container mx-auto max-w-2xl px-6">
                     <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Wie ich arbeite</h2>
                     <p class="text-lg mt-6 max-w-prose text-deep-blue-green/80">
-                        Ich habe eine fundierte Ausbildung im aktiven, nicht-direktiven Zuhören, inspiriert von Methoden wie der gewaltfreien Kommunikation (GFK) und der klientenzentrierten Gesprächsführung. Es ist meine tiefe Überzeugung, dass jeder Mensch es verdient hat, gehört zu werden, ohne unterbrochen oder korrigiert zu werden.
+                        Ich habe eine fundierte Ausbildung im aktiven, nicht-direktiven Zuhören. Es ist meine tiefe Überzeugung, dass jeder Mensch es verdient hat, gehört zu werden.
                     </p>
-
-                    <hr class="calm-divider my-16">
-
-                    <h2 class="font-sans text-3xl font-bold text-deep-blue-green">Warum ich diesen Raum geschaffen habe</h2>
-                    <p class="text-lg mt-6 max-w-prose text-deep-blue-green/80">
-                        Ich habe diesen Dienst gegründet, weil ich selbst erlebt habe, wie schwer es sein kann, einen vertrauensvollen Ort für die Sorgen des Alltags zu finden – einen Ort ohne Wartezeiten, ohne Stigma und ohne den Druck, "funktionieren" zu müssen.
-                    </p>
-                    <p class="text-lg mt-4 font-semibold max-w-prose text-deep-blue-green">
-                         Meine Motivation ist die menschliche Präsenz: Eine ruhige, warme Stimme, die einfach da ist.
-                    </p>
-
-                    <hr class="calm-divider my-16">
-
-                    <div class="safe-space-bubble md:p-12">
-                        <h2 class="font-sans text-2xl md:text-3xl font-bold text-deep-blue-green">Grenzen: Was ich tue – und was nicht</h2>
-                        
-                        <div class="mt-8 grid md:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="font-sans text-lg font-bold text-deep-blue-green uppercase tracking-wider text-sm mb-4 border-b border-deep-blue-green/20 pb-2">Das Erwartet Dich</h3>
-                                <ul class="space-y-3 text-lg text-deep-blue-green/80">
-                                    <li class="flex items-start">
-                                        <span class="text-sage-green font-bold text-xl mr-3">✓</span> Einen geschützten Raum.
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="text-sage-green font-bold text-xl mr-3">✓</span> Empathisches Zuhören.
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="text-sage-green font-bold text-xl mr-3">✓</span> Spiegelung deiner Gefühle.
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="font-sans text-lg font-bold text-deep-blue-green uppercase tracking-wider text-sm mb-4 border-b border-deep-blue-green/20 pb-2">Das biete ich nicht</h3>
-                                 <ul class="space-y-3 text-lg text-deep-blue-green/80">
-                                    <li class="flex items-start">
-                                        <span class="text-rose-400 font-bold text-xl mr-3">✕</span> Therapie oder Diagnosen.
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="text-rose-400 font-bold text-xl mr-3">✕</span> Ärztliche Behandlung.
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="text-rose-400 font-bold text-xl mr-3">✕</span> Vorgefertigte Ratschläge.
-                                    </li>
-                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="text-center mt-20">
                          <a href="#booking" onclick="navigateTo('booking')" class="prominent-cta w-full sm:w-auto hidden md:inline-block">Session buchen – Sicher & Anonym</a>
                     </div>
@@ -377,7 +315,7 @@
                 <div class="container mx-auto max-w-3xl px-6 text-center">
                     <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Dein Weg zur Entlastung</h1>
                     <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
-                        Wähle die Form, die sich für dich am besten anfühlt. Jede Session ist 100% vertraulich.
+                        Wähle die Form, die sich für dich am besten anfühlt.
                     </p>
                 </div>
             </section>
@@ -387,18 +325,9 @@
                     <h2 class="font-sans text-3xl font-bold text-deep-blue-green text-center">Wähle dein anonymes Format</h2>
                     <p class="text-center text-lg mt-4 mb-16 text-deep-blue-green/70">Finde die Kommunikationsform, die dir gerade am meisten Sicherheit gibt.</p>
                     
-                    <!-- Updated Grid for Tablet Optimization: md:grid-cols-2 ensures tablets don't squeeze 3 cols -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                        <!-- Chat -->
-                        <div class="safe-space-bubble flex flex-col h-full transition-transform hover:-translate-y-1 duration-300">
-                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">💬</div>
-                            <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Chat Session</h3>
-                            <p class="text-sm font-bold text-sage-green uppercase tracking-wide mt-1">Digitaler Raum zum Sortieren</p>
-                            <p class="text-deep-blue-green/80 mt-4 flex-grow leading-relaxed">
-                                Für Momente, in denen du deine Gedanken lieber aufschreibst. Das Tippen hilft, Gefühle zu sortieren und du hast Zeit zum Formulieren. Völlig anonym, ohne Stimme, ohne Bild.
-                            </p>
-                        </div>
-
+                    <!-- Updated Grid: 2 Columns since Chat is removed -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 max-w-4xl mx-auto">
+                        
                         <!-- Audio (Highlighted) -->
                         <div class="safe-space-bubble flex flex-col h-full border-2 border-sage-green shadow-lg bg-white/40 relative overflow-hidden">
                              <div class="absolute top-0 right-0 bg-sage-green text-white text-xs font-bold px-3 py-1 rounded-bl-lg">BELIEBT</div>
@@ -411,7 +340,7 @@
                         </div>
 
                         <!-- Video -->
-                        <div class="safe-space-bubble flex flex-col h-full transition-transform hover:-translate-y-1 duration-300 md:col-span-2 lg:col-span-1">
+                        <div class="safe-space-bubble flex flex-col h-full transition-transform hover:-translate-y-1 duration-300">
                              <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🎥</div>
                              <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Video Session</h3>
                              <p class="text-sm font-bold text-sage-green uppercase tracking-wide mt-1">Direkte, ruhige Präsenz</p>
@@ -422,39 +351,76 @@
                     </div>
                 </div>
             </section>
+        </main>
 
-            <hr class="calm-divider my-16">
+        <!-- ===== Sicherheit & Anonymität Page (UPDATED TO USER'S REQUEST) ===== -->
+        <main id="page-privacy" class="page-content">
+            <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-rose-beige/10">
+                <div class="container mx-auto max-w-3xl px-6 text-center">
+                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Deine Sicherheit & Anonymität</h1>
+                    <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
+                        Vertrauen ist die Basis. Hier erfährst du präzise, wie deine Anonymität gewährleistet wird.
+                    </p>
+                </div>
+            </section>
             
-            <section class="py-16 md:py-24 bg-warm-linen">
-                <div class="container mx-auto max-w-4xl px-6 grid md:grid-cols-2 gap-10 items-center">
-                      <div>
-                        <h2 class="font-sans text-3xl md:text-4xl font-bold text-deep-blue-green">Dauer & Preise</h2>
-                        <p class="text-lg mt-6 max-w-prose text-deep-blue-green/80">
-                            Wähle die Länge, die zu deinem aktuellen emotionalen Zustand passt. Faire Preise für echten Fokus.
-                        </p>
-                         <ul class="mt-8 space-y-4">
-                            <li class="bg-white/60 rounded-2xl p-6 border border-rose-beige/30">
-                                <div class="flex justify-between items-baseline mb-2">
-                                    <strong class="font-sans text-xl text-deep-blue-green">Fast Support</strong>
-                                    <span class="text-sage-green font-bold">20 Min</span>
-                                </div>
-                                <p class="text-deep-blue-green/70 text-sm">Für akute Momente der Überlastung, in denen du schnell einen Zuhörer brauchst.</p>
-                            </li>
-                            <li class="bg-white/80 rounded-2xl p-6 border border-sage-green/50 shadow-sm">
-                                <div class="flex justify-between items-baseline mb-2">
-                                    <strong class="font-sans text-xl text-deep-blue-green">Intensive Session</strong>
-                                    <span class="text-deep-blue-green font-bold">50 Min</span>
-                                </div>
-                                <p class="text-deep-blue-green/70 text-sm">Um tiefer in deine Gedanken einzutauchen und Dingen wirklich Raum zu geben.</p>
-                            </li>
-                        </ul>
+            <section class="py-16 md:py-24">
+                <div class="container mx-auto max-w-4xl px-6">
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        
+                        <!-- Block 1: Vertraulichkeit -->
+                        <div class="text-center safe-space-bubble border border-gray-100 bg-white/40 shadow-md flex flex-col items-center">
+                            <div class="text-4xl mb-4 text-sage-green">🔒</div>
+                            <h3 class="font-sans text-xl font-bold text-deep-blue-green mb-3">Das Prinzip der Vertraulichkeit</h3>
+                            <p class="text-deep-blue-green/70 text-sm flex-grow">
+                                Alles, was du in unseren Sessions teilst, bleibt **zu 100% vertraulich**. Ich unterliege einer strengen, selbst auferlegten Schweigepflicht. Es gibt keine Weitergabe von Inhalten, es sei denn, es liegt eine akute Selbst- oder Fremdgefährdung vor.
+                            </p>
+                        </div>
+
+                        <!-- Block 2: Keine Aufzeichnungen -->
+                        <div class="text-center safe-space-bubble border border-gray-100 bg-white/40 shadow-md flex flex-col items-center">
+                            <div class="text-4xl mb-4 text-sage-green">💾</div>
+                            <h3 class="font-sans text-xl font-bold text-deep-blue-green mb-3">Keine Aufzeichnungen</h3>
+                            <p class="text-deep-blue-green/70 text-sm flex-grow">
+                                Ich speichere keine Inhalte deiner Gespräche. Chat-Verläufe werden unmittelbar nach der Session gelöscht. Es gibt keine Aufzeichnungen von Audio- oder Videoanrufen. Die verwendete Plattform ist Ende-zu-Ende verschlüsselt.
+                            </p>
+                        </div>
+
+                        <!-- Block 3: Anonymität beim Buchen -->
+                        <div class="text-center safe-space-bubble border border-gray-100 bg-white/40 shadow-md flex flex-col items-center">
+                            <div class="text-4xl mb-4 text-sage-green">🕵️</div>
+                            <h3 class="font-sans text-xl font-bold text-deep-blue-green mb-3">Anonymität beim Buchen</h3>
+                            <p class="text-deep-blue-green/70 text-sm flex-grow">
+                                Du musst bei der Buchung keinen echten Namen angeben. Die E-Mail-Adresse, die du für den Session-Link verwendest, wird 24 Stunden nach deiner Session automatisch aus meinem System gelöscht.
+                            </p>
+                        </div>
                     </div>
-                    <div class="safe-space-bubble text-center border-2 border-deep-blue-green/10">
-                        <h3 class="font-sans text-2xl font-bold text-deep-blue-green">Der nächste Schritt.</h3>
-                        <p class="text-lg mt-4 text-deep-blue-green/80">
-                            Finde einen Termin, der für dich passt. Ganz ohne Druck.
-                        </p>
-                        <a href="#booking" onclick="navigateTo('booking')" class="prominent-cta mt-8 w-full hidden md:inline-block">Jetzt Session buchen</a>
+
+                    <!-- Ethik & Notfall -->
+                    <div class="mt-16 pt-16 border-t border-rose-beige/50">
+                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green mb-6 text-center">Ethische Grenzen & Notfall</h2>
+                        <div class="safe-space-bubble bg-rose-beige/20 max-w-3xl mx-auto p-6 md:p-8 border-2 border-rose-beige shadow-lg">
+                            <p class="text-deep-blue-green/90 text-lg mb-6 leading-air">
+                                Dieser Dienst ist **kein Ersatz** für professionelle psychologische oder psychiatrische Behandlung. Bei akuter Selbst- oder Fremdgefährdung bin ich verpflichtet, dich auf professionelle Notfalldienste zu verweisen, da ich diese Art von Nothilfe nicht leisten kann.
+                            </p>
+                            
+                            <h3 class="font-sans text-xl font-bold text-deep-blue-green border-b border-rose-beige/50 pb-2 mb-4">Im akuten Notfall wende dich bitte sofort an:</h3>
+                            <ul class="space-y-3 font-mono text-deep-blue-green text-lg font-semibold">
+                                <li class="flex items-center">
+                                    <span class="text-2xl mr-3 text-sage-green">📞</span>
+                                    <span>Telefonseelsorge (24/7): <a href="tel:+08001110111" class="underline hover:no-underline">0800 111 0 111</a></span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-2xl mr-3 text-sage-green">🚑</span>
+                                    <span>Rettungsdienst / Notruf: <a href="tel:+112" class="underline hover:no-underline">112</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-20">
+                         <a href="#booking" onclick="navigateTo('booking')" class="prominent-cta w-full sm:w-auto">Session buchen – Sicher & Anonym</a>
                     </div>
                 </div>
             </section>
@@ -483,24 +449,24 @@
                             <!-- 1. Format Selection -->
                             <div>
                                 <label class="block text-xs font-bold text-deep-blue-green uppercase tracking-wider mb-3 ml-1">1. Wie möchtest du sprechen?</label>
-                                <div class="grid grid-cols-3 gap-3">
-                                    <!-- Option: Chat -->
-                                    <button class="relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-100 hover:border-sage-green hover:bg-sage-green/5 transition-all group">
-                                        <span class="text-2xl mb-2 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition">💬</span>
-                                        <span class="text-sm font-semibold text-deep-blue-green/70 group-hover:text-deep-blue-green">Chat</span>
-                                    </button>
+                                <div class="grid grid-cols-2 gap-4">
                                     
-                                    <!-- Option: Audio (Selected State Simulation) -->
-                                    <button class="relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-deep-blue-green bg-deep-blue-green/5 transition-all shadow-sm">
-                                        <div class="absolute top-2 right-2 w-2.5 h-2.5 bg-deep-blue-green rounded-full"></div>
-                                        <span class="text-2xl mb-2 scale-110">📞</span>
-                                        <span class="text-sm font-bold text-deep-blue-green">Audio</span>
+                                    <!-- Option: Audio (Selected by Default) -->
+                                    <button id="format-audio" onclick="selectFormat('audio')" class="relative flex flex-col items-center justify-center p-5 rounded-2xl border-2 border-deep-blue-green bg-deep-blue-green/5 transition-all shadow-sm group">
+                                        <!-- Selected Indicator Dot -->
+                                        <div id="dot-audio" class="absolute top-3 right-3 w-3 h-3 bg-deep-blue-green rounded-full"></div>
+                                        
+                                        <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">📞</span>
+                                        <span class="text-base font-bold text-deep-blue-green">Audio</span>
                                     </button>
                                     
                                     <!-- Option: Video -->
-                                    <button class="relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 border-gray-100 hover:border-sage-green hover:bg-sage-green/5 transition-all group">
-                                        <span class="text-2xl mb-2 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition">🎥</span>
-                                        <span class="text-sm font-semibold text-deep-blue-green/70 group-hover:text-deep-blue-green">Video</span>
+                                    <button id="format-video" onclick="selectFormat('video')" class="relative flex flex-col items-center justify-center p-5 rounded-2xl border-2 border-gray-100 hover:border-sage-green hover:bg-sage-green/5 transition-all group">
+                                        <!-- Hidden Indicator Dot -->
+                                        <div id="dot-video" class="hidden absolute top-3 right-3 w-3 h-3 bg-deep-blue-green rounded-full"></div>
+                                        
+                                        <span class="text-3xl mb-2 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-transform">🎥</span>
+                                        <span class="text-base font-semibold text-deep-blue-green/70 group-hover:text-deep-blue-green">Video</span>
                                     </button>
                                 </div>
                             </div>
@@ -509,21 +475,32 @@
                             <div>
                                 <label class="block text-xs font-bold text-deep-blue-green uppercase tracking-wider mb-3 ml-1">2. Dauer wählen</label>
                                 <div class="grid grid-cols-2 gap-4">
-                                     <button class="flex items-center justify-between p-4 rounded-2xl border-2 border-gray-100 hover:border-sage-green transition text-left group hover:bg-warm-linen/30">
+                                     <!-- Option: 20 Min -->
+                                     <button id="duration-20" onclick="selectDuration('20')" class="flex items-center justify-between p-4 rounded-2xl border-2 border-gray-100 hover:border-sage-green transition text-left group hover:bg-warm-linen/30">
                                         <div>
                                             <span class="block font-bold text-deep-blue-green group-hover:text-deep-blue-green">20 Min</span>
                                             <span class="text-xs text-deep-blue-green/50 font-medium">Fast Support</span>
                                         </div>
-                                        <div class="w-5 h-5 rounded-full border-2 border-gray-300 group-hover:border-sage-green"></div>
+                                        <!-- Unchecked Circle -->
+                                        <div id="radio-20" class="w-5 h-5 rounded-full border-2 border-gray-300 group-hover:border-sage-green"></div>
+                                        <!-- Checked Circle (Hidden) -->
+                                        <div id="radio-20-checked" class="hidden flex items-center justify-center w-5 h-5 rounded-full border-2 border-deep-blue-green">
+                                            <div class="w-2.5 h-2.5 bg-deep-blue-green rounded-full"></div>
+                                        </div>
                                     </button>
-                                     <button class="flex items-center justify-between p-4 rounded-2xl border-2 border-deep-blue-green bg-deep-blue-green/5 transition text-left shadow-sm">
+
+                                     <!-- Option: 50 Min (Selected by Default) -->
+                                     <button id="duration-50" onclick="selectDuration('50')" class="flex items-center justify-between p-4 rounded-2xl border-2 border-deep-blue-green bg-deep-blue-green/5 transition text-left shadow-sm">
                                         <div>
                                             <span class="block font-bold text-deep-blue-green">50 Min</span>
                                             <span class="text-xs text-deep-blue-green/70 font-medium">Intensive Session</span>
                                         </div>
-                                        <div class="flex items-center justify-center w-5 h-5 rounded-full border-2 border-deep-blue-green">
+                                        <!-- Checked Circle -->
+                                        <div id="radio-50-checked" class="flex items-center justify-center w-5 h-5 rounded-full border-2 border-deep-blue-green">
                                             <div class="w-2.5 h-2.5 bg-deep-blue-green rounded-full"></div>
                                         </div>
+                                        <!-- Unchecked Circle (Hidden) -->
+                                        <div id="radio-50" class="hidden w-5 h-5 rounded-full border-2 border-gray-300"></div>
                                     </button>
                                 </div>
                             </div>
@@ -536,13 +513,14 @@
                                         <span class="font-bold text-deep-blue-green">Morgen</span>
                                         <span class="text-deep-blue-green/50 text-xs font-medium uppercase tracking-wide">Nov 24</span>
                                     </div>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        <button class="py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">14:00</button>
-                                        <button class="py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">15:30</button>
-                                        <button class="py-2.5 px-2 rounded-lg bg-deep-blue-green text-white text-sm font-bold shadow-md transform scale-105">17:00</button>
-                                        <button class="py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">18:30</button>
-                                        <button class="py-2.5 px-2 rounded-lg bg-gray-50 border border-gray-100 text-sm text-gray-400 cursor-not-allowed line-through">19:00</button>
-                                        <button class="py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">20:15</button>
+                                    <div class="grid grid-cols-3 gap-2" id="time-slots">
+                                        <button onclick="selectTime(this)" class="time-slot-btn py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">14:00</button>
+                                        <button onclick="selectTime(this)" class="time-slot-btn py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">15:30</button>
+                                        <!-- 17:00 set as default selected for demo -->
+                                        <button onclick="selectTime(this)" class="time-slot-btn py-2.5 px-2 rounded-lg bg-deep-blue-green text-white border-transparent text-sm font-bold shadow-md transform scale-105 transition">17:00</button>
+                                        <button onclick="selectTime(this)" class="time-slot-btn py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">18:30</button>
+                                        <button onclick="selectTime(this)" class="time-slot-btn py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">19:00</button>
+                                        <button onclick="selectTime(this)" class="time-slot-btn py-2.5 px-2 rounded-lg bg-white border border-gray-200 text-sm font-medium text-deep-blue-green/70 hover:bg-deep-blue-green hover:text-white hover:border-transparent transition">20:15</button>
                                     </div>
                                     <div class="mt-3 text-center">
                                         <button class="text-xs font-semibold text-sage-green hover:text-deep-blue-green underline decoration-sage-green decoration-2 underline-offset-2 transition">Andere Tage anzeigen</button>
@@ -574,8 +552,9 @@
                             <!-- Summary & CTA -->
                             <div class="space-y-4">
                                 <div class="flex justify-between items-center text-sm text-deep-blue-green/80 px-1">
-                                    <span>Audio Session (50 Min)</span>
-                                    <span class="font-bold">89,00 €</span>
+                                    <!-- This text could be dynamic, but keeping it static for visual prototype -->
+                                    <span id="summary-text">Audio Session (50 Min)</span>
+                                    <span class="font-bold" id="summary-price">89,00 €</span>
                                 </div>
                                 
                                 <button class="w-full bg-deep-blue-green text-warm-linen font-bold text-lg py-4 rounded-2xl shadow-xl shadow-deep-blue-green/10 hover:bg-opacity-90 hover:translate-y-[-2px] transition-all transform flex items-center justify-center group">
@@ -584,7 +563,6 @@
                                 </button>
                                 
                                 <div class="flex justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                                    <!-- Simple visual representations of payment methods (text for now to keep no-assets rule) -->
                                     <span class="text-[10px] font-bold border border-gray-300 rounded px-1 text-gray-500">VISA</span>
                                     <span class="text-[10px] font-bold border border-gray-300 rounded px-1 text-gray-500">Mastercard</span>
                                     <span class="text-[10px] font-bold border border-gray-300 rounded px-1 text-gray-500">PayPal</span>
@@ -604,72 +582,9 @@
             </section>
         </main>
 
-        <!-- ===== Datenschutz & Sicherheit Page ===== -->
-        <main id="page-privacy" class="page-content">
-            <section class="pt-24 pb-16 md:pt-32 md:pb-24 bg-soft-blue/10">
-                <div class="container mx-auto max-w-3xl px-6 text-center">
-                    <h1 class="font-sans text-4xl md:text-6xl font-extrabold text-deep-blue-green">Deine Sicherheit</h1>
-                    <p class="text-xl md:text-2xl text-deep-blue-green/80 mt-6 max-w-prose mx-auto">
-                        Vertrauen ist die Basis. Hier erfährst du präzise, wie deine Anonymität gewährleistet wird.
-                    </p>
-                </div>
-            </section>
-
-            <section class="py-24 md:py-32">
-                <div class="container mx-auto max-w-2xl px-6 space-y-16">
-                    <div>
-                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green flex items-center">
-                            <span class="bg-sage-green/20 p-2 rounded-lg mr-4 text-2xl">🔒</span> Das Prinzip der Vertraulichkeit
-                        </h2>
-                        <p class="text-lg mt-4 max-w-prose text-deep-blue-green/80">
-                            Alles, was du in unseren Sessions teilst, bleibt <strong>zu 100% vertraulich</strong>. Ich unterliege einer strengen, selbst auferlegten Schweigepflicht. Es gibt keine Weitergabe von Inhalten, es sei denn, es liegt eine akute Selbst- oder Fremdgefährdung vor.
-                        </p>
-                    </div>
-                    
-                    <hr class="calm-divider">
-
-                    <div>
-                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green flex items-center">
-                             <span class="bg-sage-green/20 p-2 rounded-lg mr-4 text-2xl">💾</span> Keine Aufzeichnungen
-                        </h2>
-                        <p class="text-lg mt-4 max-w-prose text-deep-blue-green/80">
-                            Ich speichere keine Inhalte deiner Gespräche. Chat-Verläufe werden unmittelbar nach der Session gelöscht. Es gibt keine Aufzeichnungen von Audio- oder Videoanrufen. Die verwendete Plattform ist Ende-zu-Ende verschlüsselt.
-                        </p>
-                    </div>
-
-                    <hr class="calm-divider">
-
-                    <div>
-                        <h2 class="font-sans text-3xl font-bold text-deep-blue-green flex items-center">
-                             <span class="bg-sage-green/20 p-2 rounded-lg mr-4 text-2xl">🕵️</span> Anonymität beim Buchen
-                        </h2>
-                        <p class="text-lg mt-4 max-w-prose text-deep-blue-green/80">
-                            Du musst bei der Buchung keinen echten Namen angeben. Die E-Mail-Adresse, die du für den Session-Link verwendest, wird 24 Stunden nach deiner Session automatisch aus meinem System gelöscht.
-                        </p>
-                    </div>
-
-                    <hr class="calm-divider">
-
-                    <div class="bg-rose-beige/20 p-8 rounded-3xl border border-rose-beige/50">
-                        <h2 class="font-sans text-2xl font-bold text-deep-blue-green">Ethische Grenzen & Notfall</h2>
-                        <p class="text-base mt-4 max-w-prose text-deep-blue-green/90">
-                            Dieser Dienst ist <strong>kein Ersatz für professionelle psychologische oder psychiatrische Behandlung</strong>. Bei akuter Selbst- oder Fremdgefährdung bin ich verpflichtet, dich auf professionelle Notfalldienste zu verweisen, da ich diese Art von Nothilfe nicht leisten kann.
-                        </p>
-                        <p class="text-base mt-6 font-semibold max-w-prose text-deep-blue-green">
-                            Im akuten Notfall wende dich bitte sofort an:
-                        </p>
-                        <ul class="mt-3 space-y-2 text-deep-blue-green/90 font-medium">
-                            <li>📞 Telefonseelsorge (24/7): <a href="tel:08001110111" class="underline hover:text-deep-blue-green">0800 111 0 111</a></li>
-                            <li>🚑 Rettungsdienst / Notruf: <a href="tel:112" class="underline hover:text-deep-blue-green">112</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
-
     </div>
 
-    <!-- FIXED MOBILE CONTACT BAR (Visible only on small screens) -->
+    <!-- FIXED MOBILE CONTACT BAR -->
     <a href="#booking" onclick="navigateTo('booking')" class="md:hidden fixed bottom-6 left-4 right-4 bg-deep-blue-green text-warm-linen font-bold text-lg py-4 rounded-2xl shadow-2xl flex items-center justify-center z-40 transition-transform transform hover:scale-105 border border-sage-green/30">
         <span>Jetzt anonym sprechen</span>
     </a>
@@ -690,8 +605,96 @@
     </footer>
 
     <script>
+        // Selection Logic for Booking
+        function selectFormat(selectedType) {
+            // ... existing selectFormat logic ...
+            const types = ['audio', 'video'];
+            
+            types.forEach(type => {
+                const btn = document.getElementById('format-' + type);
+                const dot = document.getElementById('dot-' + type);
+                const isSelected = (type === selectedType);
+                
+                if (isSelected) {
+                    // Active State
+                    btn.classList.remove('border-gray-100', 'hover:border-sage-green', 'hover:bg-sage-green/5');
+                    btn.classList.add('border-deep-blue-green', 'bg-deep-blue-green/5');
+                    dot.classList.remove('hidden');
+                    // Text styling
+                    btn.querySelector('span:last-child').classList.remove('font-semibold', 'text-deep-blue-green/70');
+                    btn.querySelector('span:last-child').classList.add('font-bold', 'text-deep-blue-green');
+                } else {
+                    // Inactive State
+                    btn.classList.add('border-gray-100', 'hover:border-sage-green', 'hover:bg-sage-green/5');
+                    btn.classList.remove('border-deep-blue-green', 'bg-deep-blue-green/5');
+                    dot.classList.add('hidden');
+                    // Text styling
+                    btn.querySelector('span:last-child').classList.add('font-semibold', 'text-deep-blue-green/70');
+                    btn.querySelector('span:last-child').classList.remove('font-bold', 'text-deep-blue-green');
+                }
+            });
+            updateSummary();
+        }
+
+        function selectDuration(selectedTime) {
+            // ... existing selectDuration logic ...
+            const times = ['20', '50'];
+            
+            times.forEach(time => {
+                const btn = document.getElementById('duration-' + time);
+                const radioChecked = document.getElementById('radio-' + time + '-checked');
+                const radioUnchecked = document.getElementById('radio-' + time);
+                const isSelected = (time === selectedTime);
+
+                if (isSelected) {
+                    // Active State
+                    btn.classList.remove('border-gray-100', 'hover:bg-warm-linen/30', 'hover:border-sage-green');
+                    btn.classList.add('border-deep-blue-green', 'bg-deep-blue-green/5');
+                    radioChecked.classList.remove('hidden');
+                    radioUnchecked.classList.add('hidden');
+                } else {
+                    // Inactive State
+                    btn.classList.add('border-gray-100', 'hover:bg-warm-linen/30', 'hover:border-sage-green');
+                    btn.classList.remove('border-deep-blue-green', 'bg-deep-blue-green/5');
+                    radioChecked.classList.add('hidden');
+                    radioUnchecked.classList.remove('hidden');
+                }
+            });
+            updateSummary();
+        }
+        
+        // NEW: Logic for Time Slot Selection
+        function selectTime(clickedBtn) {
+            // Reset all buttons in the container
+            const allBtns = document.querySelectorAll('.time-slot-btn');
+            allBtns.forEach(btn => {
+                // Remove active classes
+                btn.classList.remove('bg-deep-blue-green', 'text-white', 'border-transparent', 'shadow-md', 'transform', 'scale-105', 'font-bold');
+                // Add inactive classes
+                btn.classList.add('bg-white', 'border-gray-200', 'text-deep-blue-green/70', 'font-medium');
+            });
+
+            // Set active state for clicked button
+            clickedBtn.classList.remove('bg-white', 'border-gray-200', 'text-deep-blue-green/70', 'font-medium');
+            clickedBtn.classList.add('bg-deep-blue-green', 'text-white', 'border-transparent', 'shadow-md', 'transform', 'scale-105', 'font-bold');
+        }
+
+        function updateSummary() {
+            // ... existing updateSummary logic ...
+            const isAudio = !document.getElementById('dot-audio').classList.contains('hidden');
+            const is50 = !document.getElementById('radio-50-checked').classList.contains('hidden');
+            
+            const typeText = isAudio ? 'Audio Session' : 'Video Session';
+            const timeText = is50 ? '(50 Min)' : '(20 Min)';
+            const price = is50 ? '89,00 €' : '45,00 €';
+
+            document.getElementById('summary-text').textContent = `${typeText} ${timeText}`;
+            document.getElementById('summary-price').textContent = price;
+        }
+
         // Routing Logic
         function navigateTo(pageId) {
+            // ... existing routing logic ...
             // Remove active class from all pages
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => {
